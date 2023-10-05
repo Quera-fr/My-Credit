@@ -4,15 +4,23 @@ import pandas as pd
 import joblib
 from pydantic import BaseModel
 
-class InputData(BaseModel):
-    n: int
-
 transformer = joblib.load("transformer.pkl")
 foret = joblib.load("foret.sav")
 
 app = FastAPI(
     title="Page qui pousse"
 )
+
+@app.get("/")
+def racine():
+    return "Bonjour monde"
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str):
+    return {"item_id": item_id}
+
+class InputData(BaseModel):
+    n: int
 
 @app.get("/d")
 def r(n):

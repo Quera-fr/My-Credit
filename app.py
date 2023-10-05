@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import joblib
 import uvicorn
 import numpy as np
+import pandas as pd
 
 app = FastAPI()
 
@@ -39,10 +40,11 @@ async def predict_loan(request: LoanRequest):
     input_data = [[request.age, request.job, request.marital, request.education,
                    request.default, request.housing, request.balance, request.previous,
                    request.loan, request.contact, request.day, request.month, request.duration,
-                   request.campaign, request.pdays, request.poutcome]]
+                   request.campaign, request.pdays,request.poutcome, request.poutcome]]
     
-    # Scale the input data using the loaded scaler
-    scaled_input_data = scaler.transform(input_data)
+    # Scale the input data using the loaded scaler       scaled_input_data = 
+    scaled_input_data= scaler.transform(pd.DataFrame(input_data, index=[0]))
+    print(scaler.transform(input_data)[:-1])
     
     # Make predictions using the trained model
     prediction = model.predict(scaled_input_data)[0]

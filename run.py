@@ -5,7 +5,8 @@ app = FastAPI(
     title="Page qui pousse"
 )
 
-
+def r(n):
+    return (n/2)
 
 @app.get("/square")
 def square(n: str=None):

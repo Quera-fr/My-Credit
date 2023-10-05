@@ -42,19 +42,13 @@ class LoanRequest(BaseModel):
     pdays: int
     poutcome: str
 
-# @app.get("/prediction")
-# def prediction(dictionnaire: dict):
-#     df = pd.DataFrame(dictionnaire, index=[0])
-#     df = transformer.transform(df)
-#     pred = foret.predict(df)
-#     return pred
 
 @app.post("/prediction")
 def prediction(dictionnaire: LoanRequest):
     df = pd.DataFrame(dictionnaire, index=[0])
     df = transformer.transform(df)
     pred = foret.predict(df)
-    return pred
+    return {"prediction": pred}
 
 
 

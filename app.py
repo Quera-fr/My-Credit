@@ -66,7 +66,7 @@ async def predict_loan(request: LoanRequest):
     prediction = model.predict(scaled_input_data)[0]
     
     # Map prediction to loan status
-    prediction_result = "Loan Approved" if prediction == 1 else "Loan Denied"
+    prediction_result = "Loan Approved" if prediction == "yes" else "Loan Denied"
     
     return {"prediction": prediction_result}
 

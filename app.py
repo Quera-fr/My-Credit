@@ -30,10 +30,10 @@ class LoanResponse(BaseModel):
     prediction: str
 
 # Load the trained model
-model = joblib.load('/home/diaby/IA_EXOS/Appli_Heroku/Prediction_bancaire/foret.sav')
+model = joblib.load('./foret.sav')
 
 # Load the scaler used during model training
-scaler = joblib.load('/home/diaby/IA_EXOS/Appli_Heroku/Prediction_bancaire/transformer.pkl')
+scaler = joblib.load('./transformer.pkl')
 
 @app.post('/predict_loan')
 async def predict_loan(request: LoanRequest):

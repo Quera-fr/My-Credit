@@ -33,28 +33,10 @@ class LoanResponse(BaseModel):
 model = joblib.load('./pipe.sav')
 
 @app.post('/predict_loan')
-async def predict_loan(request: LoanRequest):
+async def predict_loan(input_data: LoanRequest):
     # Prepare the input data for prediction
-    input_data = pd.DataFrame({
-        'age': [request.age],
-        'job': [request.job],
-        'marital': [request.marital],
-        'education': [request.education],
-        'default': [request.default],
-        'housing': [request.housing],
-        'balance': [request.balance],
-        'previous': [request.previous],
-        'loan': [request.loan],
-        'contact': [request.contact],
-        'day': [request.day],
-        'month': [request.month],
-        'duration': [request.duration],
-        'campaign': [request.campaign],
-        'pdays': [request.pdays],
-        'poutcome': [request.poutcome]
-    })
 
-    
+    input_data = dict(input_data)
     df = pd.DataFrame(input_data, index=[0])
     
     # Make predictions using the trained model

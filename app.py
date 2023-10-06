@@ -30,10 +30,7 @@ class LoanResponse(BaseModel):
     prediction: str
 
 # Load the trained model
-model = joblib.load('./foret.sav')
-
-# Load the scaler used during model training
-scaler = joblib.load('./transformer.pkl')
+model = joblib.load('./pipe.sav')
 
 @app.post('/predict_loan')
 async def predict_loan(request: LoanRequest):
@@ -58,12 +55,10 @@ async def predict_loan(request: LoanRequest):
     })
 
     
-    # Scale the input data using the loaded scaler       scaled_input_data = 
-    scaled_input_data= scaler.transform(pd.DataFrame(input_data, index=[0]))
-    print(scaler.transform(input_data)[:-1])
+    df = pd.DataFrame(input_data, index=[0])
     
     # Make predictions using the trained model
-    prediction = model.predict(scaled_input_data)[0]
+    prediction = model.predict(df)[0]
     
     # Map prediction to loan status
     prediction_result = "Prêt Accordé" if prediction == "yes" else "Prêt Réfusé"

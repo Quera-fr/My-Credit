@@ -48,4 +48,4 @@ async def predict_loan(input_data: LoanRequest):
     return {"prediction": prediction_result}
 
 if __name__=='__main__':
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='127.0.0.1', port=4000)

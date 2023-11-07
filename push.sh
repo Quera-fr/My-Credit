@@ -1,15 +1,15 @@
 # Connect to Heroku
-heroku login
+#heroku login
 
 # Heroku container login
 heroku container:login
 
 # Create Heroku app
-heroku create api-isen-g2
+#heroku create api-isen-g2
 
 
 # Build Image MAC ARM api-iseng2
-docker buildx build --platform linux/amd64 -t api-iseng2  .
+#docker buildx build --platform linux/amd64 -t api-iseng2  .
 
 # Build Image 
 docker build -t api-iseng2  .
